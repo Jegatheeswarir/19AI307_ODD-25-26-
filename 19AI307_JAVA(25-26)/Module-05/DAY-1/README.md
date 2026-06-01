@@ -1,80 +1,52 @@
-# Ex.No:5(A) INPUTSTREAMREADER
+# Ex.No:5(A) INPUTSTREAMREADER 
 
 ## QUESTION:
-Write a Java program to read input from the user using **InputStreamReader**.
-
----
+Write a Java program to write characters to a file using FileWriter.
 
 ## AIM:
-To write a Java program to demonstrate **reading input using InputStreamReader and BufferedReader**.
-
----
+To write character data into a file using the FileWriter class in Java.
 
 ## ALGORITHM :
-1. Start the program.  
-2. Import the necessary packages `java.io`.  
-3. Create a class `Main`.  
-4. Inside the `main()` method create an object of `InputStreamReader`.  
-5. Wrap it using `BufferedReader` to read input efficiently.  
-6. Read a string input using `readLine()`.  
-7. Display the entered input.  
-8. Handle exceptions using `throws IOException`.  
-9. Stop the program.
-
----
+1.	Import java.io.FileWriter and java.io.IOException.
+2.	Take user input using Scanner.
+3.	Create a FileWriter object with the desired file name.
+4.	Use write() method to write text into the file.
+5.	Close the FileWriter and handle exceptions using try-catch.
 
 ## PROGRAM:
-
-```java
+ ```
 /*
-Program to implement InputStreamReader using Java
-Developed by:JEGATHEESWARI R
+Program to implement a Methods using Java
+Developed by: JEGATHEESWARI R
 RegisterNumber: 212223230092
 */
 ```
+
+## SOURCE CODE:
 ```
 import java.io.*;
 
-public class Main{
-    public static void main(String[] args) throws IOException{
+public class FileWriteExample {
+    public static void main(String[] args) {
+        try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+            String filename = br.readLine();
+            String content = br.readLine();
 
-        InputStreamReader isr = new InputStreamReader(System.in);
-        BufferedReader br = new BufferedReader(isr);
+            FileWriter fw = new FileWriter(filename);
+            fw.write(content);
+            fw.close();
 
-        String input = br.readLine();
-
-        System.out.println("You entered: " + input);
+            System.out.println("File written successfully.");
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+        }
     }
 }
 ```
 
----
-
-## SOURCE CODE:
-
-Compile the program using
-
-```
-javac Main.java
-```
-
-Run the program using
-
-```
-java Main
-```
-
----
-
 ## OUTPUT:
-
-```
-Hello Java
-You entered: Hello Java
-```
-
----
+<img width="1239" height="395" alt="image" src="https://github.com/user-attachments/assets/f1eb5219-05ab-4882-990c-ab044ebd6ca8" />
 
 ## RESULT:
-
-Thus, the Java program to read input using **InputStreamReader and BufferedReader** was executed successfully and the output was verified.
+The program successfully writes the entered text into output.txt using FileWriter.
