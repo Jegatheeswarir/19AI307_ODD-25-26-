@@ -36,7 +36,7 @@ Developed by: JEGATHEESWARI R
 RegisterNumber:212223230092
 */
 ```
-````
+```
 
 import java.util.Scanner;
 
@@ -66,8 +66,6 @@ public class Main{
 }
 ```
 
----
-
 ## SOURCE CODE:
 
 Compile the program using
@@ -89,7 +87,7 @@ java Main
 <img width="1015" height="227" alt="image" src="https://github.com/user-attachments/assets/83606ba7-2c05-4889-8c55-ea8e341e93d8" />
 
 
----
+
 
 ## RESULT:
 
