@@ -8,14 +8,23 @@ To write a Java program that finds the index position of a specified element fro
 
 ## ALGORITHM :
 1.Start the program.
+
 2.Import the necessary package 'java.util'
+
 3.Read the size of the array from the user.
+
 4.Create an array of the given size.
+
 5.Read the array elements from the user and store them in the array.
+
 6.Read the element to be searched.
+
 7.Traverse the array and compare each element with the search element.
+
 8.If matched, print the index position and terminate.
+
 9.If not found, display "Element not found".
+
 10.Stop the program.
 
 
