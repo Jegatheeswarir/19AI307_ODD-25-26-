@@ -1,27 +1,29 @@
-# Ex.No:4(C) COMPOSITION IN JAVA
+# Ex.No:4(D) DESIGN PATTERN -- ABSTRACT FACTORY
 
 ## QUESTION:
-Write a Java program to demonstrate the concept of **Composition**.
+Write a Java program to implement the **Abstract Factory Design Pattern** to create UI components (Button and Checkbox) for different themes.
 
 ---
 
 ## AIM:
-To write a Java program to demonstrate **Composition by creating a class that contains objects of another class**.
+To write a Java program to demonstrate the **Abstract Factory Design Pattern** by creating related objects without specifying their concrete classes.
 
 ---
 
 ## ALGORITHM :
 1. Start the program.  
 2. Import the necessary package `java.util`.  
-3. Create a class `Engine` with an attribute `engineType`.  
-4. Create a method `displayEngine()` to display engine details.  
-5. Create a class `Car`.  
-6. Declare variables `carName` and an object of class `Engine`.  
-7. Create a constructor in `Car` to initialize car name and engine object.  
-8. Create a method `displayCar()` to display car and engine details.  
-9. In the main class, create objects of `Engine` and `Car`.  
-10. Call the method to display details.  
-11. Stop the program.
+3. Create interfaces `Button` and `Checkbox` with method `render()`.  
+4. Create concrete classes `DarkButton`, `LightButton`, `DarkCheckbox`, and `LightCheckbox`.  
+5. Implement the `render()` method in each class.  
+6. Create an interface `UIFactory` with methods `createButton()` and `createCheckbox()`.  
+7. Create concrete factory classes `DarkThemeFactory` and `LightThemeFactory`.  
+8. Implement factory methods to return corresponding objects.  
+9. In the main class, read the theme input from the user.  
+10. Based on input, create the appropriate factory object.  
+11. Use the factory to create UI components.  
+12. Call the `render()` methods to display output.  
+13. Stop the program.
 
 ---
 
@@ -29,52 +31,90 @@ To write a Java program to demonstrate **Composition by creating a class that co
 
 ```java
 /*
-Program to implement Composition Concepts in Java
+Program to implement Abstract Factory Pattern using Java
 Developed by: JEGATHEESWARI R
-RegisterNumber: 212223230092
+RegisterNumber:212223230092
 */
 ```
 ```
-import java.util.*;
+import java.util.Scanner;
 
-class Engine{
-    String engineType;
+interface Button { void render(); }
+interface Checkbox { void render(); }
 
-    Engine(String engineType){
-        this.engineType = engineType;
-    }
-
-    void displayEngine(){
-        System.out.println("Engine Type: " + engineType);
+// Concrete Button classes
+class DarkButton implements Button {
+    public void render() {
+        System.out.println("Dark Button created");
     }
 }
 
-class Car{
-    String carName;
-    Engine engine;   // Composition
-
-    Car(String carName, Engine engine){
-        this.carName = carName;
-        this.engine = engine;
-    }
-
-    void displayCar(){
-        System.out.println("Car Name: " + carName);
-        engine.displayEngine();
+class LightButton implements Button {
+    public void render() {
+        System.out.println("Light Button created");
     }
 }
 
-public class Main{
-    public static void main(String[] args){
-        Scanner sc = new Scanner(System.in);
+// Concrete Checkbox classes
+class DarkCheckbox implements Checkbox {
+    public void render() {
+        System.out.println("Dark Checkbox created");
+    }
+}
 
-        String carName = sc.nextLine();
-        String engineType = sc.nextLine();
+class LightCheckbox implements Checkbox {
+    public void render() {
+        System.out.println("Light Checkbox created");
+    }
+}
 
-        Engine e = new Engine(engineType);
-        Car c = new Car(carName, e);
+// Abstract Factory
+interface UIFactory {
+    Button createButton();
+    Checkbox createCheckbox();
+}
 
-        c.displayCar();
+// Concrete Factories
+class DarkThemeFactory implements UIFactory {
+    public Button createButton() {
+        return new DarkButton();
+    }
+
+    public Checkbox createCheckbox() {
+        return new DarkCheckbox();
+    }
+}
+
+class LightThemeFactory implements UIFactory {
+    public Button createButton() {
+        return new LightButton();
+    }
+
+    public Checkbox createCheckbox() {
+        return new LightCheckbox();
+    }
+}
+
+// Main class
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        String theme = scanner.nextLine().toLowerCase();
+
+        UIFactory factory;
+
+        if (theme.equals("dark"))
+            factory = new DarkThemeFactory();
+        else if (theme.equals("light"))
+            factory = new LightThemeFactory();
+        else {
+            System.out.println("Invalid theme");
+            return;
+        }
+
+        factory.createButton().render();
+        factory.createCheckbox().render();
     }
 }
 ```
@@ -99,15 +139,11 @@ java Main
 
 ## OUTPUT:
 
-```
-BMW
-Petrol
-Car Name: BMW
-Engine Type: Petrol
-```
+
+<img width="545" height="266" alt="image" src="https://github.com/user-attachments/assets/00ef4853-0c0d-4b06-af77-d3d09101d1aa" />
 
 ---
 
 ## RESULT:
 
-Thus, the Java program to demonstrate **Composition in Java** was executed successfully and the output was verified.
+Thus, the Java program to implement the **Abstract Factory Design Pattern** was executed successfully and the output was verified.
