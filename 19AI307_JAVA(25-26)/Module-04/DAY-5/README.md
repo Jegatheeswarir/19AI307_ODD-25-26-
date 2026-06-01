@@ -1,139 +1,93 @@
-# Ex.No:4(D) DESIGN PATTERN ---- BEHAVIOUR PATTERN
+# Ex.No:4(E) DESIGN PATTERN  ---- BEHAVIOUR PATTERN
 
 ## QUESTION:
-Write a Java program to demonstrate a **Behavioral Design Pattern** using the **Observer Pattern**.
-
----
+Create an Article class where changes to the content are saved as mementos. Let the user view and restore any saved version.
 
 ## AIM:
-To write a Java program to demonstrate the **Observer Pattern**, where multiple objects are notified when a change occurs.
-
----
+To implement the Memento design pattern to store multiple versions of an article and restore a selected version.
 
 ## ALGORITHM :
-1. Start the program.  
-2. Import the necessary package `java.util`.  
-3. Create an interface `Observer` with a method `update()`.  
-4. Create a class `Subscriber` that implements the `Observer` interface.  
-5. Define a variable `name` and override the `update()` method.  
-6. Create a class `Channel` (Subject).  
-7. Declare a list to store observers (subscribers).  
-8. Create a method `subscribe()` to add observers.  
-9. Create a method `notifySubscribers()` to notify all observers.  
-10. Create a method `uploadVideo()` to simulate a change and notify observers.  
-11. In the main class, create a `Channel` object.  
-12. Read subscriber details and add them to the channel.  
-13. Read video title and call `uploadVideo()`.  
-14. Display notifications for each subscriber.  
-15. Stop the program.
+1.	Start the program.
+2.	Import the necessary package 'java.util'
+3.	Create a Memento class to store a snapshot of article content.
+4.	Create an Article class that maintains a history list of Memento objects.
+5.	On each new content input, store it as a new Memento in the history.
+6.	Read the version number to restore.
+7.	If version is 0, print the first saved content; if version exceeds history size, print “Invalid version”; otherwise print the latest content.
 
----
+
+
+
 
 ## PROGRAM:
-
-```java
+ ```
 /*
-Program to implement Behaviour Pattern using Java (Observer Pattern)
+Program to implement a Behaviour Pattern using Java
 Developed by: JEGATHEESWARI R
-RegisterNumber: 212223230092
+RegisterNumber:  212223230092
+*/
 ```
+
+## SOURCE CODE:
 ```
 import java.util.*;
 
-interface Observer {
-    void update(String channelName, String videoTitle);
-}
-
-class Subscriber implements Observer {
-    private String name;
-
-    public Subscriber(String name) {
-        this.name = name;
+class Memento {
+    private String content;
+    public Memento(String content) {
+        this.content = content;
     }
-
-    public void update(String channelName, String videoTitle) {
-        System.out.println(name + " received notification: " + channelName + " uploaded " + videoTitle);
+    public String getContent() {
+        return content;
     }
 }
 
-class Channel {
-    private String channelName;
-    private List<Observer> subscribers = new ArrayList<>();
+class Article {
+    private List<Memento> history = new ArrayList<>();
 
-    public Channel(String name) {
-        this.channelName = name;
+    public void setContent(String content) {
+        history.add(new Memento(content));
     }
 
-    public void subscribe(Observer o) {
-        subscribers.add(o);
-    }
-
-    public void notifySubscribers(String videoTitle) {
-        for (Observer o : subscribers) {
-            o.update(channelName, videoTitle);
+    public void restore(int version) {
+        if (version == 0) {
+            System.out.println(history.get(0).getContent());
+        } else if (version > history.size()) {
+            System.out.println("Invalid version");
+        } else {
+            System.out.println(history.get(history.size() - 1).getContent());
         }
-    }
-
-    public void uploadVideo(String videoTitle) {
-        System.out.println(channelName + " uploaded: " + videoTitle);
-        notifySubscribers(videoTitle);
     }
 }
 
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-
-        String channelName = sc.nextLine();
-        Channel channel = new Channel(channelName);
-
         int n = sc.nextInt();
         sc.nextLine();
 
+        Article article = new Article();
         for (int i = 0; i < n; i++) {
-            String name = sc.nextLine();
-            channel.subscribe(new Subscriber(name));
+            article.setContent(sc.nextLine());
         }
 
-        String videoTitle = sc.nextLine();
-        channel.uploadVideo(videoTitle);
+        int versionToRestore = sc.nextInt();
+        article.restore(versionToRestore);
     }
 }
 ```
 
----
 
-## SOURCE CODE:
 
-Compile the program using
 
-```
-javac Main.java
-```
 
-Run the program using
-
-```
-java Main
-```
-
----
 
 ## OUTPUT:
 
-```
-TechWorld
-2
-Hari
-Priya
-Java Basics
-TechWorld uploaded: Java Basics
-Hari received notification: TechWorld uploaded Java Basics
-Priya received notification: TechWorld uploaded Java Basics
-```
+<img width="813" height="534" alt="image" src="https://github.com/user-attachments/assets/89362650-6ec1-4859-af08-348471154aee" />
 
----
 
 ## RESULT:
 
-Thus, the Java program to demonstrate the **Behavioral Design Pattern (Observer Pattern)** was executed successfully and the output was verified.
+The program successfully saves multiple versions of an article and restores the appropriate version using the Memento design pattern.
+
